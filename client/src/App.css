@@ -1,0 +1,173 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+}
+
+/* WRAPPER */
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CONTAINER */
+.login-container {
+  width: 900px;
+  height: 550px;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+/* LEFT SIDE */
+.left {
+  flex: 1;
+  background: linear-gradient(135deg, #cfd9df, #e2ebf0);
+  padding: 0; /* hilangkan padding biar full */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* penting biar rapi */
+}
+
+.left h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.left span {
+  color: #ff6b00;
+}
+
+.illustration {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* biar isi penuh tanpa gepeng */
+}
+
+/* RIGHT SIDE */
+.right {
+  flex: 1;
+  background: #fff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  color: #4f8cff;
+  margin-bottom: 10px;
+}
+
+.right h2 {
+  margin-bottom: 10px;
+}
+
+.subtext {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.subtext span {
+  color: #4f8cff;
+  cursor: pointer;
+}
+
+/* INPUT */
+input {
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* BUTTON */
+.login-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background: #2f80ed;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.forgot {
+  font-size: 13px;
+  margin-top: 10px;
+  color: #2f80ed;
+  cursor: pointer;
+  text-align: right;
+}
+
+/* DIVIDER */
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+/* SOCIAL */
+.socials {
+  display: flex;
+  justify-content: space-between;
+}
+
+.social-btn {
+  width: 30%;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+}
+
+/* REMEMBER */
+.remember {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.remember span {
+  margin-left: 5px;
+}
+
+/* TERMS */
+.terms {
+  font-size: 12px;
+  margin-top: 15px;
+  color: #555;
+}
+
+.terms span {
+  color: #2f80ed;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    height: auto;
+    width: 90%;
+  }
+
+  .left {
+    display: none;
+  }
+}
