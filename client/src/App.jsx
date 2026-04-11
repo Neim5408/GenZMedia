@@ -1,5 +1,6 @@
 import "./App.css";
-import loginImage from "./assets/login.jpg";
+import loginImage from "./assets/login2.png";
+import logo from "./assets/logo.png";
 
 function App() {
   return (
@@ -8,7 +9,6 @@ function App() {
 
         {/* LEFT SIDE */}
         <div className="left">
-
           <img
             src={loginImage}
             alt="illustration"
@@ -18,13 +18,19 @@ function App() {
 
         {/* RIGHT SIDE */}
         <div className="right">
-          <h3 className="logo">myEdlinks</h3>
 
-          <h2>Hai, selamat datang kembali</h2>
-          <p className="subtext">
-            Baru di myEdlinks? <span>Daftar Gratis</span>
-          </p>
+          {/* HEADER */}
+          <div className="header">
+            <img src={logo} alt="logo" className="logo-img" />
 
+            <h2>Hai, selamat datang kembali</h2>
+
+            <p className="subtext">
+              Baru di insight? <span>Daftar Gratis</span>
+            </p>
+          </div>
+
+          {/* FORM */}
           <input type="email" placeholder="Contoh: email@example.com" />
           <input type="password" placeholder="Masukkan kata sandi kamu" />
 
@@ -35,9 +41,17 @@ function App() {
           <p className="divider">Atau masuk menggunakan</p>
 
           <div className="socials">
-            <button className="social-btn"></button>
-            <button className="social-btn"></button>
-            <button className="social-btn"></button>
+            <button className="social-btn">
+              <img src="/facebook.png" alt="fb" />
+            </button>
+
+            <button className="social-btn">
+              <img src="/google.png" alt="google" />
+            </button>
+
+            <button className="social-btn">
+              <img src="/apple.png" alt="apple" />
+            </button>
           </div>
 
           <div className="remember">
@@ -46,10 +60,10 @@ function App() {
           </div>
 
           <p className="terms">
-            Dengan melanjutkan, kamu menerima <span>Syarat Penggunaan</span> dan <span>Kebijakan Privasi</span>
+            Dengan melanjutkan, kamu menerima <span>Syarat Penggunaan</span> dan <span>Kebijakan Privasi kami.</span>
           </p>
-        </div>
 
+        </div>
       </div>
     </div>
   );
