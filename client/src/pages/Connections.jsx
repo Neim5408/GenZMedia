@@ -1,5 +1,5 @@
 import React from "react";
-import {Users, UserPlus, UserCheck, UserRoundPen, MessageSquare, Divide} from "lucide-react";
+import {Users, UserPlus, UserCheck, UserRoundPen, MessageSquare} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
     dummyConnectionsData as connections,
@@ -115,4 +115,4 @@ const Connections = () => {
     );
 };
 
-export default Connections;
+export default Connections
