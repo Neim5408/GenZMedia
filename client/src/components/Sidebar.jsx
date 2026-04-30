@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets, dummyUserData } from "../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import MenuItems from "./MenuItems";
@@ -9,6 +9,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
   const user = dummyUserData;
   const { signOut } = useClerk();
+  const [notificationCount, setNotificationCount] = useState(5);
 
   return (
     <div

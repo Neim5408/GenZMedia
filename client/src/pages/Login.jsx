@@ -1,9 +1,11 @@
 import React from "react";
 import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { SignIn } from '@clerk/react'
 
 const Login = () => {
+    const navigate = useNavigate();
     return (
         <div className="relative min-h-screen flex flex-col md:flex-row">
             {/* Background Image */}
@@ -32,7 +34,61 @@ const Login = () => {
 
             {/* right side : Login form */}
             <div className="flex-1 flex items-center justify-center p-6 sm:p-10">
-                <SignIn />
+                <div className="w-full max-w-md aspect-[1/1] bg-white/90 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col justify-center">
+                
+                    <h2 className="text-xl font-semibold text-center">
+                        Sign in to My Application
+                    </h2>
+                    <p className="text-sm text-gray-500 text-center mb-5">
+                        Welcome back! Please sign in to continue
+                    </p>
+
+                    <form className="space-y-4">
+                        {/* Email */}
+                        <div>
+                            <label className="text-sm font-medium text-gray-700">
+                                Email address
+                            </label>
+                            <input
+                                type="email"
+                                placeholder="Enter your email address"
+                                className="w-full mt-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            />
+                        </div>
+
+                        {/* Password */}
+                        <div>
+                            <label className="text-sm font-medium text-gray-700">
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                placeholder="Enter your password"
+                                className="w-full mt-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            />
+                        </div>
+
+                        {/* Button */}
+                        <button
+                            type="submit"
+                            className="w-full bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-900 transition"
+                        >
+                            Continue →
+                        </button>
+                    </form>
+
+                    {/* Footer */}
+                    <p className="text-sm text-center text-gray-500 mt-4">
+                        Don't have an account?{" "}
+                        <span 
+                            className="text-indigo-600 cursor-pointer hover:underline"
+                            onClick={() => navigate("/register")}
+                        >
+                            Sign up
+                        </span>
+                    </p>
+
+                </div>
             </div>
         </div>
     )
