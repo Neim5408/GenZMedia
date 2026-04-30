@@ -1,5 +1,6 @@
-    import React, { useEffect } from "react";
-    import { dummyMessagesData, dummyUserData } from "../assets/assets";
+import React, { useEffect, useState, useRef } from "react";
+import { dummyMessagesData, dummyUserData } from "../assets/assets";
+import { Image, SendHorizontal } from "lucide-react";
 
     const ChatBox = () => {
 
@@ -7,7 +8,7 @@
         const [text, setText] = useState("")
         const [image, setImage] = useState(null)
         const [user, setUser] = useState(dummyUserData)
-        const messageEndRef = useRef(null)
+        const messagesEndRef = useRef(null)
 
         const SendMessage = async () => {
 
@@ -30,17 +31,17 @@
                     <div className="space-y-4 max-w-4xl mx-auto">
                         {
                             messages.toSorted((a, b)=> new Date(a.created_at) - new Date(b.created_at)).map((message, index) => (
-                                <div key={index} className= {`flex flex-col ${message.to_user_id !== user._id ? 'items-start' : 'items-end'}`}>
-                                    <div className={`p-2 text-sm max-w-sm bg-white text-slate-700 rounded-lg shadow ${message.to_user_id !== user._id ? "rounded-bl-none" : "rounded-br-none"}`}>
+                                <div key={index} className= {`flex flex-col ${message.from_user_id === user._id ? 'items-end' : 'items-start'}`}>
+                                    <div className={`p-2 text-sm max-w-sm bg-white text-slate-700 rounded-lg shadow ${message.from_user_id === user._id ? "rounded-br-none" : "rounded-bl-none"}`}>
                                     {
                                     message.message_type === "image" && <img src={message.media_url} alt="" className="w-full max-w-sm rounded-lg mb-1"/>
                                     }
-                                    <p>{message.content}</p>
+                                    <p>{message.text}</p>
                                     </div>
                                 </div>
                             ))
                         }
-                        <div ref={messageEndRef} />
+                        <div ref={messagesEndRef} />
                     </div>
                     <div className="px-4">
                         <div className="flex items-center gap-3 pl-5 p-1.5 bg-white w-full max-w-xl mx-auto border border-gray-200 shadow rounded-full mb-5">
@@ -52,13 +53,13 @@
                                     image 
                                     ? 
                                     <img src={URL.createObjectURL(image)} alt="" className="h-8 rounded"/>
-                                    : <ImageIcon className="size-7 text-gray-400 cursor-pointer"/>
+                                    : <Image className="size-7 text-gray-400 cursor-pointer"/>
                                 }
                                 <input type="file" id="image" accept="image/*" hidden onChange={(e) =>  setImage(e.target.files[0])} />
                             </label>
 
                             <button onClick={SendMessage} className="bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-700 hover:from-purple-800 active:scale-95 cursor-pointer text-white p-2 rounded-full">
-                                <SendHorizonal size={18}/>
+                                <SendHorizontal size={18}/>
                             </button>
                         </div>
                     </div>
