@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useRef, useEffect } from "react"; // Tambahkan useEffect
 import { useNavigate } from "react-router-dom";
 import { Image as ImageIcon, X } from "lucide-react";
@@ -188,14 +187,6 @@ const CreatePost = () => {
                     </div>
                 </form>
             </div>
-=======
-import React from "react";
-
-const CreatePost = () => {
-    return (
-        <div>
-            <h1>Create Post Page</h1>
->>>>>>> origin/Kibob_update_home
         </div>
     );
 };

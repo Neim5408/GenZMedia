@@ -48,11 +48,7 @@ const unfollowUser = async (followerId, followingId) => {
 
 const getFollowers = async (userId) => {
   const result = await pool.query(
-<<<<<<< HEAD
     `SELECT u.id, u.username, u.full_name, u.avatar_url, u.bio FROM user_db.follows f
-=======
-    `SELECT u.id, u.username, u.avatar_url FROM user_db.follows f
->>>>>>> origin/Kibob_update_home
      JOIN user_db.users_profile u ON f.follower_id = u.id
      WHERE f.following_id = $1`, [userId]
   );
@@ -61,11 +57,7 @@ const getFollowers = async (userId) => {
 
 const getFollowing = async (userId) => {
   const result = await pool.query(
-<<<<<<< HEAD
     `SELECT u.id, u.username, u.full_name, u.avatar_url, u.bio FROM user_db.follows f
-=======
-    `SELECT u.id, u.username, u.avatar_url FROM user_db.follows f
->>>>>>> origin/Kibob_update_home
      JOIN user_db.users_profile u ON f.following_id = u.id
      WHERE f.follower_id = $1`, [userId]
   );
@@ -80,7 +72,6 @@ const deleteUser = async (id) => {
   return result.rows[0];
 };
 
-<<<<<<< HEAD
 // --- FUNGSI BARU: Cari Pengguna ---
 const searchUsers = async (searchQuery) => {
   let query = `
@@ -101,8 +92,6 @@ const searchUsers = async (searchQuery) => {
   return result.rows;
 };
 
-=======
->>>>>>> origin/Kibob_update_home
 module.exports = { 
     createUser, 
     getUserById, 
@@ -111,10 +100,6 @@ module.exports = {
     getFollowing, 
     getFollowers, 
     deleteUser,
-<<<<<<< HEAD
     updateUserProfileData,
     searchUsers
-=======
-    updateUserProfileData
->>>>>>> origin/Kibob_update_home
 };

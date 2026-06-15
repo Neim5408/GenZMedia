@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-<<<<<<< HEAD
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { userApi, chatApi, notificationApi } from "../utils/api";
-import { Image, SendHorizontal, ArrowLeft, X } from "lucide-react";
+import { Image, SendHorizontal, ArrowLeft, X, Trash2 } from "lucide-react";
 import Loading from "../components/Loading";
 import Swal from "sweetalert2";
 
@@ -100,6 +99,45 @@ const ChatBox = () => {
     }
   };
 
+  const handleDeleteMessage = async (messageId) => {
+    if (!messageId) return;
+
+    Swal.fire({
+      title: "Hapus Pesan?",
+      text: "Pesan ini akan dihapus dari tampilan Anda.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await chatApi.delete(`/chat/message/${messageId}`, {
+            params: { user_id: currentUser.id }
+          });
+          setMessages(prev => prev.filter(m => m.id !== messageId));
+          Swal.fire({
+            title: "Terhapus",
+            text: "Pesan berhasil dihapus dari obrolan Anda.",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false
+          });
+        } catch (error) {
+          console.error("Gagal menghapus pesan:", error);
+          Swal.fire({
+            title: "Gagal",
+            text: "Gagal menghapus pesan.",
+            icon: "error",
+            confirmButtonColor: "#1e1b4b"
+          });
+        }
+      }
+    });
+  };
+
   const formatMessageTime = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);
@@ -139,27 +177,49 @@ const ChatBox = () => {
               const isOutgoing = message.sender_id === currentUser.id;
               return (
                 <div
-                  key={index}
-                  className={`flex flex-col max-w-[70%] ${isOutgoing ? "self-end items-end" : "self-start items-start"}`}
+                  key={message.id || index}
+                  className={`flex flex-col max-w-[70%] group ${isOutgoing ? "self-end items-end" : "self-start items-start"}`}
                 >
-                  <div
-                    className={`p-3 text-sm rounded-2xl shadow-sm ${
-                      isOutgoing
-                        ? "bg-indigo-600 text-white rounded-br-none"
-                        : "bg-white text-slate-700 rounded-bl-none border border-slate-100"
-                    }`}
-                  >
-                    {message.media_url && (
-                      <div className="overflow-hidden rounded-2xl border border-black/5 shadow-sm max-w-sm mb-2 cursor-pointer hover:opacity-90 transition duration-200 active:scale-[0.99]">
-                        <img
-                          src={message.media_url}
-                          alt="Attachment"
-                          className="w-full h-auto object-cover max-h-72"
-                          onClick={() => setPreviewImageUrl(message.media_url)}
-                        />
-                      </div>
+                  <div className="flex items-center gap-2">
+                    {isOutgoing && (
+                      <button
+                        onClick={() => handleDeleteMessage(message.id)}
+                        className="opacity-0 group-hover:opacity-100 p-1.5 rounded-full hover:bg-slate-200/60 text-slate-400 hover:text-red-500 transition cursor-pointer border-none bg-transparent"
+                        title="Hapus pesan"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     )}
-                    {message.message_text && <p className="leading-relaxed break-words">{message.message_text}</p>}
+
+                    <div
+                      className={`p-3 text-sm rounded-2xl shadow-sm ${
+                        isOutgoing
+                          ? "bg-indigo-600 text-white rounded-br-none"
+                          : "bg-white text-slate-700 rounded-bl-none border border-slate-100"
+                      }`}
+                    >
+                      {message.media_url && (
+                        <div className="overflow-hidden rounded-2xl border border-black/5 shadow-sm max-w-sm mb-2 cursor-pointer hover:opacity-90 transition duration-200 active:scale-[0.99]">
+                          <img
+                            src={message.media_url}
+                            alt="Attachment"
+                            className="w-full h-auto object-cover max-h-72"
+                            onClick={() => setPreviewImageUrl(message.media_url)}
+                          />
+                        </div>
+                      )}
+                      {message.message_text && <p className="leading-relaxed break-words">{message.message_text}</p>}
+                    </div>
+
+                    {!isOutgoing && (
+                      <button
+                        onClick={() => handleDeleteMessage(message.id)}
+                        className="opacity-0 group-hover:opacity-100 p-1.5 rounded-full hover:bg-slate-200/60 text-slate-400 hover:text-red-500 transition cursor-pointer border-none bg-transparent"
+                        title="Hapus pesan"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    )}
                   </div>
                   <span className="text-[9px] text-slate-400 font-semibold mt-1 px-1">
                     {formatMessageTime(message.created_at)}
@@ -258,75 +318,3 @@ const ChatBox = () => {
 };
 
 export default ChatBox;
-=======
-import { dummyMessagesData, dummyUserData } from "../assets/assets";
-import { Image, SendHorizontal } from "lucide-react";
-
-    const ChatBox = () => {
-
-        const messages = dummyMessagesData
-        const [text, setText] = useState("")
-        const [image, setImage] = useState(null)
-        const [user, setUser] = useState(dummyUserData)
-        const messagesEndRef = useRef(null)
-
-        const SendMessage = async () => {
-
-        }
-
-        useEffect(() => {
-            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-        }, [messages])
-
-        return user && (
-            <div className="flex flex-col h-screen">
-                <div className="flex items-center gap-2 p-2 md:px-10 xl:px-42 bg-gradient-to-r from-indigo-500 to-purple-50 border-b border-gray-300">
-                    <img src={user.profile_picture} alt="" className="size-8 rounded-full"/>
-                    <div>
-                        <p className="font-medium">{user.full_name}</p>
-                        <p className="text-sm text-gray-500 -mt-1.5">@{user.username}</p>
-                    </div>
-                </div>
-                <div className="p-5 md:px-10 h-full overflow-y-scroll">
-                    <div className="space-y-4 max-w-4xl mx-auto">
-                        {
-                            messages.toSorted((a, b)=> new Date(a.created_at) - new Date(b.created_at)).map((message, index) => (
-                                <div key={index} className= {`flex flex-col ${message.from_user_id === user._id ? 'items-end' : 'items-start'}`}>
-                                    <div className={`p-2 text-sm max-w-sm bg-white text-slate-700 rounded-lg shadow ${message.from_user_id === user._id ? "rounded-br-none" : "rounded-bl-none"}`}>
-                                    {
-                                    message.message_type === "image" && <img src={message.media_url} alt="" className="w-full max-w-sm rounded-lg mb-1"/>
-                                    }
-                                    <p>{message.text}</p>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                        <div ref={messagesEndRef} />
-                    </div>
-                    <div className="px-4">
-                        <div className="flex items-center gap-3 pl-5 p-1.5 bg-white w-full max-w-xl mx-auto border border-gray-200 shadow rounded-full mb-5">
-                            <input type="text" className="flex-1 outline-none text-slate-700" placeholder="Type a message..."
-                            onKeyDown={e=> e.key === "Enter" && SendMessage()} onChange={(e) => setText(e.target.value)} value={text}/>
-
-                            <label htmlFor="image">
-                                {
-                                    image 
-                                    ? 
-                                    <img src={URL.createObjectURL(image)} alt="" className="h-8 rounded"/>
-                                    : <Image className="size-7 text-gray-400 cursor-pointer"/>
-                                }
-                                <input type="file" id="image" accept="image/*" hidden onChange={(e) =>  setImage(e.target.files[0])} />
-                            </label>
-
-                            <button onClick={SendMessage} className="bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-700 hover:from-purple-800 active:scale-95 cursor-pointer text-white p-2 rounded-full">
-                                <SendHorizontal size={18}/>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
-    export default ChatBox;
->>>>>>> origin/Kibob_update_home

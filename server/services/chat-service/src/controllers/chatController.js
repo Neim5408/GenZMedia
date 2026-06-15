@@ -1,5 +1,4 @@
 const chatService = require('../services/chatService');
-<<<<<<< HEAD
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -46,21 +45,12 @@ const handleMessageCreation = async (req, res) => {
       io.to(receiver_id).emit('receiveMessage', message);
     }
 
-=======
-
-exports.send = async (req, res) => {
-  try {
-    const message = await chatService.sendMessage(req.body);
-    const io = req.app.get('io');
-    io.to(message.receiver_id).emit('receiveMessage', message);
->>>>>>> origin/Kibob_update_home
     res.status(201).json({ message: "Pesan terkirim", data: message });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
-<<<<<<< HEAD
 exports.send = (req, res) => {
   const contentType = req.headers['content-type'] || '';
   if (contentType.includes('multipart/form-data')) {
@@ -74,8 +64,6 @@ exports.send = (req, res) => {
   }
 };
 
-=======
->>>>>>> origin/Kibob_update_home
 exports.getHistory = async (req, res) => {
   try {
     const { userA, userB } = req.params;
@@ -86,11 +74,10 @@ exports.getHistory = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 exports.getMessages = async (req, res) => {
   try {
     const { receiverId } = req.params;
-    const userId = req.query.user_id || req.body.sender_id;
+    const userId = req.query.user_id || (req.body && req.body.sender_id);
     if (!userId) return res.status(400).json({ error: "User ID wajib dikirim" });
     const history = await chatService.fetchHistory(userId, receiverId);
     res.status(200).json(history);
@@ -110,13 +97,25 @@ exports.getConversations = async (req, res) => {
   }
 };
 
-=======
->>>>>>> origin/Kibob_update_home
 exports.markAsRead = async (req, res) => {
   try {
     const { senderId, receiverId } = req.body;
     const result = await chatService.readMessages(senderId, receiverId);
     res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+exports.deleteMessage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user_id = (req.body && req.body.user_id) || req.query.user_id;
+
+    if (!user_id) throw new Error("User ID wajib dikirim");
+
+    const updatedMessage = await chatService.deleteMessage(id, user_id);
+    res.status(200).json({ message: "Pesan berhasil dihapus", data: updatedMessage });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

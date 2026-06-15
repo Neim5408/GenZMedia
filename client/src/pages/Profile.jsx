@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
 import { Link, useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { userApi, postApi } from "../utils/api";
@@ -14,23 +13,11 @@ const Profile = () => {
     // profileId ini didapat dari URL
     const { profileId } = useParams();
     const navigate = useNavigate();
-=======
-import { Link, useParams } from "react-router-dom";
-import moment from "moment";
-import { dummyUserData, dummyPostsData } from "../assets/assets";
-import Loading from "../components/Loading";
-import PostCard from "../components/PostCard";
-import UserProfileInfo from "../components/UserProfileInfo";
-
-const Profile = () => {
-    const { profileId } = useParams();
->>>>>>> origin/Kibob_update_home
     const [user, setUser] = useState(null);
     const [posts, setPosts] = useState([]);
     const [activeTab, setActiveTab] = useState('posts');
     const [showEdit, setShowEdit] = useState(false);
 
-<<<<<<< HEAD
     // Modal connections states
     const [showConnectionsModal, setShowConnectionsModal] = useState(false);
     const [modalType, setModalType] = useState("followers"); // "followers" or "following"
@@ -137,30 +124,6 @@ const Profile = () => {
                     onFollowersClick={() => handleOpenConnectionsModal("followers")}
                     onFollowingClick={() => handleOpenConnectionsModal("following")}
                 />
-=======
-    const fetchUser = async () => {
-      setUser (dummyUserData)
-      setPosts (dummyPostsData)
-    }
-
-    useEffect(() => {
-      fetchUser()
-    }, [])
-
-    return user ?(
-        <div className='relative h-full overflow-y-scroll bg-gray-50 p-6'>
-            <div className='max-w-3xl mx-auto'>
-              {/*Profile Card */}
-              <div className='bg-white rounded-2xl shadow overflow-hidden'>
-                {/*Cover Photo */}
-                <div
-                  className='h-40 md:h-56 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 bg-cover bg-center'
-                  style={{ backgroundImage: user.cover_photo ? `url(${user.cover_photo})` : undefined }}
-                >
-                </div>
-                {/*User Info */}
-                <UserProfileInfo user={user} posts={posts} profileId={profileId} setShowEdit={setShowEdit} />
->>>>>>> origin/Kibob_update_home
               </div>
 
               {/* Tabs */}
@@ -180,22 +143,17 @@ const Profile = () => {
                 {/* Posts */}
                 {activeTab === 'posts' && (
                   <div className='mt-6 flex flex-col items-center gap-6'>
-<<<<<<< HEAD
                     {posts.length > 0 ? (
                         /* PENTING: Meneruskan authorProfile={user} ke PostCard */
                         posts.map((post) => <PostCard key={post.id} post={post} authorProfile={user} />)
                     ) : (
                         <p className="text-gray-500 mt-4">Belum ada postingan.</p>
                     )}
-=======
-                    {posts.map((post) => <PostCard key={post._id} post={post} />)}
->>>>>>> origin/Kibob_update_home
                   </div>
                 )}
 
                 {/* Media */}
                 {activeTab === 'media' && (
-<<<<<<< HEAD
                   <div className='flex flex-wrap mt-6 max-w-6xl gap-4 justify-center'>
                     {/* Sesuaikan dengan kolom media_url dan created_at di PostgreSQL */}
                     {posts.filter((post) => post.media_url).length > 0 ? (
@@ -225,25 +183,11 @@ const Profile = () => {
                     ) : (
                         <p className="text-gray-500 mt-4">Belum ada media/foto.</p>
                     )}
-=======
-                  <div className='flex flex-wrap mt-6 max-w-6xl'>
-                    {posts.filter((post) => post.image_urls.length > 0).map((post) => (
-                      <React.Fragment key={post._id}>
-                        {post.image_urls.map((image, index) => (
-                          <Link target='_blank' to={image} key={index} className='relative group'>
-                            <img src={image} key={index} className='w-64 aspect-video object-cover' alt='' />
-                            <p className='absolute bottom-0 right-0 text-xs p-1 px-3 backdrop-blur-xl text-white opacity-0 group-hover:opacity-100 transition duration-300'>Posted {moment(post.createdAt).fromNow()}</p>
-                          </Link>
-                        ))}
-                      </React.Fragment>
-                    ))}
->>>>>>> origin/Kibob_update_home
                   </div>
                 )}
 
               </div>
             </div>
-<<<<<<< HEAD
             
             {/* --- Bagian Edit Profil --- */}
             {showEdit && (
@@ -332,12 +276,3 @@ const Profile = () => {
 };
 
 export default Profile;
-=======
-            {/* Edit Profile Modal */}
-            {showEdit && <p>show profile edit</p>}
-        </div>
-    ) : (<Loading />)
-};
-
-export default Profile;
->>>>>>> origin/Kibob_update_home

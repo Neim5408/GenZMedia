@@ -1,6 +1,5 @@
 const pool = require('../../db');
 
-<<<<<<< HEAD
 const createPost = async (userId, content, mediaUrl) => {
     const result = await pool.query(
         // PERBAIKAN: Ubah 'content' menjadi 'content_text'
@@ -9,15 +8,6 @@ const createPost = async (userId, content, mediaUrl) => {
         [userId, content, mediaUrl]
     );
     return result.rows[0];
-=======
-const createPost = async (userId, contentText, mediaUrl, isAnonymous) => {
-  const result = await pool.query(
-    `INSERT INTO post_db.posts (user_id, content_text, media_url, is_anonymous)
-     VALUES ($1, $2, $3, $4) RETURNING *`,
-    [userId, contentText, mediaUrl, isAnonymous || false]
-  );
-  return result.rows[0];
->>>>>>> origin/Kibob_update_home
 };
 
 const getAllPosts = async () => {
@@ -38,15 +28,9 @@ const getPostsByUser = async (userId) => {
 const updatePost = async (postId, userId, contentText, mediaUrl) => {
   const result = await pool.query(
     `UPDATE post_db.posts 
-<<<<<<< HEAD
       SET content_text = COALESCE($1, content_text), 
         media_url = COALESCE($2, media_url), 
         updated_at = CURRENT_TIMESTAMP 
-=======
-     SET content_text = COALESCE($1, content_text), 
-         media_url = COALESCE($2, media_url), 
-         updated_at = CURRENT_TIMESTAMP 
->>>>>>> origin/Kibob_update_home
      WHERE id = $3 AND user_id = $4 RETURNING *`,
     [contentText, mediaUrl, postId, userId]
   );
@@ -61,7 +45,6 @@ const deletePost = async (postId, userId) => {
   return result.rows[0];
 };
 
-<<<<<<< HEAD
 const deletePostById = async (postId) => {
   const result = await pool.query(
     `DELETE FROM post_db.posts WHERE id = $1 RETURNING *`,
@@ -79,6 +62,3 @@ const getPostById = async (postId) => {
 };
 
 module.exports = { createPost, getAllPosts, getPostsByUser, updatePost, deletePost, deletePostById, getPostById };
-=======
-module.exports = { createPost, getAllPosts, getPostsByUser, updatePost, deletePost };
->>>>>>> origin/Kibob_update_home

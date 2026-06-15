@@ -10,7 +10,6 @@ import Connections from "./pages/Connections";
 import Discover from "./pages/Discover";
 import Profile from "./pages/Profile";
 import CreatePost from "./pages/CreatePost";
-<<<<<<< HEAD
 import AdminDashboard from "./pages/AdminDashboard";
 // import MarketPlace from "./pages/MarketPlace";
 import Notifications from "./pages/Notifications";
@@ -38,18 +37,10 @@ const AdminRoute = ({ children }) => {
 const App = () => {
   const isAuthenticated = !!localStorage.getItem("token");
 
-=======
-import MarketPlace from "./pages/MarketPlace";
-import Notifications from "./pages/Notifications";
-import { Toaster } from "react-hot-toast";
-
-const App = () => {
->>>>>>> origin/Kibob_update_home
   return (
     <>
       <Toaster />
       <Routes>
-<<<<<<< HEAD
         {/* Rute Bebas: Login dan Register (Jika sudah login, jangan boleh ke sini lagi) */}
         <Route 
           path="/login" 
@@ -71,11 +62,6 @@ const App = () => {
           }
         >
           {/* Semua rute di bawah ini otomatis terlindungi karena berada di dalam Layout */}
-=======
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Layout />}>
->>>>>>> origin/Kibob_update_home
           <Route index element={<Feed />} />
           <Route path="feed" element={<Feed />} />
           <Route path="messages" element={<Messages />} />
@@ -83,7 +69,6 @@ const App = () => {
           <Route path="notifications" element={<Notifications />} />
           <Route path="connections" element={<Connections />} />
           <Route path="discover" element={<Discover />} />
-<<<<<<< HEAD
           {/* <Route path="marketplace" element={<MarketPlace />} /> */}
           <Route path="profile" element={<Profile />} />
           <Route path="profile/:profileId" element={<Profile />} />
@@ -96,21 +81,10 @@ const App = () => {
         </Route>
 
         {/* Jika user mengetik URL yang tidak ada */}
-=======
-          <Route path="marketplace" element={<MarketPlace />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="profile/:profileId" element={<Profile />} />
-          <Route path="create-post" element={<CreatePost />} />
-        </Route>
->>>>>>> origin/Kibob_update_home
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );
 };
 
-<<<<<<< HEAD
 export default App;
-=======
-export default App; 
->>>>>>> origin/Kibob_update_home

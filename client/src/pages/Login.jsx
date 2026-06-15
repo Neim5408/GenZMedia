@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import { Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -53,22 +52,6 @@ const Login = () => {
             <img src={assets.bgImage} alt="Background" className="absolute top-0 left-0 -z-10 w-full h-full object-cover" />
 
             {/* Left side : Branding */}
-=======
-import React from "react";
-import { Star } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
-import { SignIn } from '@clerk/react'
-
-const Login = () => {
-    const navigate = useNavigate();
-    return (
-        <div className="relative min-h-screen flex flex-col md:flex-row">
-            {/* Background Image */}
-            <img src={assets.bgImage} alt="Background" className="absolute top-0 left-0 -z-10 w-full h-full object-cover" />
-
-            {/* left side : Branding */}
->>>>>>> origin/Kibob_update_home
             <div className="flex-1 flex flex-col items-start justify-between p-6 md:p-10">
                 <img src={assets.logo} alt="" className="h-15 object-contain" />
                 <div>
@@ -89,26 +72,17 @@ const Login = () => {
                 <span className="md:h-10"></span>
             </div>
 
-<<<<<<< HEAD
             {/* Right side : Login form */}
-=======
-            {/* right side : Login form */}
->>>>>>> origin/Kibob_update_home
             <div className="flex-1 flex items-center justify-center p-6 sm:p-10">
                 <div className="w-full max-w-md aspect-[1/1] bg-white/90 backdrop-blur-md rounded-2xl shadow-xl p-6 flex flex-col justify-center">
                 
                     <h2 className="text-xl font-semibold text-center">
-<<<<<<< HEAD
                         Sign in to InSight
-=======
-                        Sign in to My Application
->>>>>>> origin/Kibob_update_home
                     </h2>
                     <p className="text-sm text-gray-500 text-center mb-5">
                         Welcome back! Please sign in to continue
                     </p>
 
-<<<<<<< HEAD
                     {/* Tampilkan pesan error jika ada */}
                     {/* {errorMsg && (
                         <div className="bg-red-100 text-red-600 p-2 rounded-md mb-4 text-sm text-center">
@@ -126,22 +100,10 @@ const Login = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter your email address"
                                 required
-=======
-                    <form className="space-y-4">
-                        {/* Email */}
-                        <div>
-                            <label className="text-sm font-medium text-gray-700">
-                                Email address
-                            </label>
-                            <input
-                                type="email"
-                                placeholder="Enter your email address"
->>>>>>> origin/Kibob_update_home
                                 className="w-full mt-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                         </div>
 
-<<<<<<< HEAD
                         <div>
                             <label className="text-sm font-medium text-gray-700">Password</label>
                             <input
@@ -150,21 +112,10 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Enter your password"
                                 required
-=======
-                        {/* Password */}
-                        <div>
-                            <label className="text-sm font-medium text-gray-700">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                placeholder="Enter your password"
->>>>>>> origin/Kibob_update_home
                                 className="w-full mt-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                         </div>
 
-<<<<<<< HEAD
                         <button
                             type="submit"
                             disabled={loading}
@@ -180,18 +131,6 @@ const Login = () => {
                         <div>admin2@insight.com / Admin456</div>
                     </div>
 
-=======
-                        {/* Button */}
-                        <button
-                            type="submit"
-                            className="w-full bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-900 transition"
-                        >
-                            Continue →
-                        </button>
-                    </form>
-
-                    {/* Footer */}
->>>>>>> origin/Kibob_update_home
                     <p className="text-sm text-center text-gray-500 mt-4">
                         Don't have an account?{" "}
                         <span 
@@ -201,10 +140,6 @@ const Login = () => {
                             Sign up
                         </span>
                     </p>
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/Kibob_update_home
                 </div>
             </div>
         </div>

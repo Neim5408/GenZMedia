@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { ArrowLeft, TextIcon, Upload, Sparkle } from "lucide-react";
 import toast from "react-hot-toast";
-<<<<<<< HEAD
 import { postApi } from "../utils/api";
-=======
->>>>>>> origin/Kibob_update_home
 
 const StoryModal = ({ setShowModal, fetchStories }) => {
     const bgColors = ["#4f46e5", "#7c3aed", "#db2777", "#e11d48", "#ca8a04", "#0d9488"];
@@ -28,7 +25,6 @@ const StoryModal = ({ setShowModal, fetchStories }) => {
             throw new Error("Please add text or photo/video before creating a story.");
         }
 
-<<<<<<< HEAD
         const currentUser = JSON.parse(localStorage.getItem('user'));
         if (!currentUser?.id) {
             throw new Error("User tidak ditemukan. Silakan login ulang.");
@@ -50,12 +46,6 @@ const StoryModal = ({ setShowModal, fetchStories }) => {
 
         setShowModal(false);
         await fetchStories();
-=======
-        await new Promise((resolve) => setTimeout(resolve, 500));
-
-        setShowModal(false);
-        fetchStories();
->>>>>>> origin/Kibob_update_home
     };
 
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
-<<<<<<< HEAD
 import { assets } from "../assets/assets";
 import StoriesBar from "../components/StoriesBar";
 import PostCard from "../components/PostCard";
@@ -45,20 +44,6 @@ const Feed = () => {
         } finally {
             setLoading(false);
         }
-=======
-import { dummyPostsData, assets } from "../assets/assets";
-import StoriesBar from "../components/StoriesBar";
-import PostCard from "../components/PostCard";
-import RecentMessages from "../components/RecentMessages";
-
-const Feed = () => {
-    const [feeds, setFeeds] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    const fetchFeeds = async () => {
-        setFeeds(dummyPostsData);
-        setLoading(false);
->>>>>>> origin/Kibob_update_home
     };
 
     useEffect(() => {
@@ -71,7 +56,6 @@ const Feed = () => {
             <div className="w-full max-w-6xl px-4 sm:px-6">
                 <StoriesBar />
                 <div className="p-4 space-y-6">
-<<<<<<< HEAD
                     {feeds.length === 0 ? (
                         <p className="text-gray-500 text-center py-10 font-medium">Belum ada postingan dari akun mana pun.</p>
                     ) : (
@@ -79,11 +63,6 @@ const Feed = () => {
                             <PostCard key={post.id || post._id} post={post} authorProfile={usersMap[post.user_id]}/>
                         ))
                     )}
-=======
-                    {feeds.map((post) => (
-                        <PostCard key={post._id} post={post}/>
-                    ))}
->>>>>>> origin/Kibob_update_home
                 </div>
             </div>
 

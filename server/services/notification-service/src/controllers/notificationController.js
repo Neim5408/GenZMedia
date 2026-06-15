@@ -31,7 +31,6 @@ exports.markRead = async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-<<<<<<< HEAD
 };
 
 exports.getAll = async (req, res) => {
@@ -64,6 +63,4 @@ exports.destroy = async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-=======
->>>>>>> origin/Kibob_update_home
 };

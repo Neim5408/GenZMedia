@@ -16,20 +16,12 @@ export const assets = {
 }
 
 export const menuItemsData = [
-<<<<<<< HEAD
     { to: '/', label: 'Home', Icon: Home },
-=======
-    { to: '/', label: 'Feed', Icon: Home },
->>>>>>> origin/Kibob_update_home
     { to: '/messages', label: 'Messages', Icon: MessageCircle },
     { to: '/notifications', label: 'Notifications', Icon: Bell },
     { to: '/connections', label: 'Connections', Icon: Users },
     { to: '/discover', label: 'Discover', Icon: Search },
-<<<<<<< HEAD
     // { to: '/marketplace', label: 'MarketPlace', Icon: ShoppingBag },
-=======
-    { to: '/marketplace', label: 'MarketPlace', Icon: ShoppingBag },
->>>>>>> origin/Kibob_update_home
     { to: '/profile', label: 'Profile', Icon: UserIcon },
 ];
 

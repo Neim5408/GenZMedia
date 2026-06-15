@@ -1,5 +1,4 @@
 const postService = require('../services/postService');
-<<<<<<< HEAD
 const postModel = require('../models/postModel');
 const multer = require('multer');
 const path = require('path');
@@ -48,18 +47,6 @@ exports.createPost = (req, res) => {
 };
 
 // --- Fungsi 2: Mengambil Semua Feed Beranda ---
-=======
-
-exports.create = async (req, res) => {
-  try {
-    const post = await postService.publishPost(req.body);
-    res.status(201).json({ message: "Berhasil membuat postingan", post });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
->>>>>>> origin/Kibob_update_home
 exports.getFeeds = async (req, res) => {
   try {
     const posts = await postService.fetchAllFeeds();
@@ -69,10 +56,7 @@ exports.getFeeds = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 // --- Fungsi 3: Mengambil Postingan Spesifik dari Profil User ---
-=======
->>>>>>> origin/Kibob_update_home
 exports.getUserFeeds = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -83,7 +67,6 @@ exports.getUserFeeds = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 // --- Fungsi 4: Mengupdate Postingan ---
 exports.update = async (req, res) => {
   try {
@@ -91,39 +74,23 @@ exports.update = async (req, res) => {
     const { user_id, content, media_url } = req.body; // disesuaikan dengan DB
     
     const post = await postService.editPost(id, user_id, content, media_url);
-=======
-exports.update = async (req, res) => {
-  try {
-    const { id } = req.params; // Ambil Post ID dari URL
-    const { user_id, content_text, media_url } = req.body;
-    
-    const post = await postService.editPost(id, user_id, content_text, media_url);
->>>>>>> origin/Kibob_update_home
     res.status(200).json({ message: "Postingan berhasil diupdate", post });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
-<<<<<<< HEAD
 // --- Fungsi 5: Menghapus Postingan ---
 exports.destroy = async (req, res) => {
   try {
     const { id } = req.params; 
     const { user_id } = req.body; 
-=======
-exports.destroy = async (req, res) => {
-  try {
-    const { id } = req.params; // Ambil Post ID dari URL
-    const { user_id } = req.body; // Ambil User ID untuk verifikasi kepemilikan
->>>>>>> origin/Kibob_update_home
 
     await postService.removePost(id, user_id);
     res.status(200).json({ message: "Postingan berhasil dihapus" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-<<<<<<< HEAD
 };
 
 // --- Fungsi 6: Mengambil Satu Postingan Spesifik ---
@@ -136,6 +103,4 @@ exports.getPost = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-=======
->>>>>>> origin/Kibob_update_home
 };
