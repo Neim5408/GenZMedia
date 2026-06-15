@@ -24,6 +24,23 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } // Batas 5MB
 }).single('image'); // Maps to backend upload processing ("image")
 
+const deleteUploadedMedia = (mediaUrl) => {
+  if (!mediaUrl) return;
+
+  try {
+    const filename = path.basename(new URL(mediaUrl).pathname);
+    const filePath = path.join(__dirname, '..', '..', 'public', 'uploads', filename);
+
+    fs.unlink(filePath, (err) => {
+      if (err && err.code !== 'ENOENT') {
+        console.warn('Gagal menghapus file media chat:', err.message);
+      }
+    });
+  } catch (err) {
+    console.warn('URL media chat tidak valid:', err.message);
+  }
+};
+
 const handleMessageCreation = async (req, res) => {
   try {
     const { sender_id, receiver_id, message_text } = req.body;
@@ -102,6 +119,28 @@ exports.markAsRead = async (req, res) => {
     const { senderId, receiverId } = req.body;
     const result = await chatService.readMessages(senderId, receiverId);
     res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+exports.deleteMedia = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { user_id } = req.body;
+
+    const result = await chatService.deleteMedia(id, user_id);
+    deleteUploadedMedia(result.mediaUrl);
+
+    const io = req.app.get('io');
+    if (io && result.message?.receiver_id) {
+      io.to(result.message.receiver_id).emit('messageMediaDeleted', result.message);
+    }
+
+    res.status(200).json({
+      message: "Media berhasil dihapus",
+      data: result.message,
+    });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

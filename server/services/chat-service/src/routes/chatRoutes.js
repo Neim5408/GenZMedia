@@ -7,5 +7,6 @@ router.get('/conversations', chatController.getConversations);
 router.get('/messages/:receiverId', chatController.getMessages);
 router.get('/history/:userA/:userB', chatController.getHistory);
 router.put('/read', chatController.markAsRead);
+router.delete('/messages/:id/media', chatController.deleteMedia);
 
 module.exports = router;

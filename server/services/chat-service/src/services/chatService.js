@@ -26,4 +26,13 @@ const fetchConversations = async (userId) => {
   return await chatModel.getConversations(userId);
 };
 
-module.exports = { sendMessage, fetchHistory, readMessages, fetchConversations };
+const deleteMedia = async (messageId, userId) => {
+  if (!messageId || !userId) throw new Error("Message ID dan User ID wajib dikirim");
+
+  const result = await chatModel.deleteMessageMedia(messageId, userId);
+  if (!result) throw new Error("Media tidak ditemukan atau kamu tidak berhak menghapusnya");
+
+  return result;
+};
+
+module.exports = { sendMessage, fetchHistory, readMessages, fetchConversations, deleteMedia };

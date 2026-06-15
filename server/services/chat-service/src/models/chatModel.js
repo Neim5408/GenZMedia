@@ -1,12 +1,16 @@
 const pool = require('../../db');
 
-const saveMessage = async (senderId, receiverId, messageText, mediaUrl = null) => {
-  // Pastikan kolom media_url ada di database
+const ensureMediaColumns = async () => {
   try {
     await pool.query(`ALTER TABLE chat_db.messages ADD COLUMN IF NOT EXISTS media_url TEXT;`);
+    await pool.query(`ALTER TABLE chat_db.messages ADD COLUMN IF NOT EXISTS media_deleted BOOLEAN DEFAULT FALSE;`);
   } catch (err) {
-    console.warn("Gagal alter table chat_db.messages:", err.message);
+    console.warn("Gagal memastikan kolom media chat:", err.message);
   }
+};
+
+const saveMessage = async (senderId, receiverId, messageText, mediaUrl = null) => {
+  await ensureMediaColumns();
 
   const result = await pool.query(
     `INSERT INTO chat_db.messages (sender_id, receiver_id, message_text, media_url)
@@ -17,12 +21,7 @@ const saveMessage = async (senderId, receiverId, messageText, mediaUrl = null) =
 };
 
 const getChatHistory = async (user1, user2) => {
-  // Pastikan kolom media_url ada di database saat fetch history
-  try {
-    await pool.query(`ALTER TABLE chat_db.messages ADD COLUMN IF NOT EXISTS media_url TEXT;`);
-  } catch (err) {
-    console.warn("Gagal alter table chat_db.messages:", err.message);
-  }
+  await ensureMediaColumns();
 
   const result = await pool.query(
     `SELECT * FROM chat_db.messages 
@@ -43,12 +42,7 @@ const markMessagesAsRead = async (senderId, receiverId) => {
 };
 
 const getConversations = async (userId) => {
-  // Pastikan kolom media_url ada
-  try {
-    await pool.query(`ALTER TABLE chat_db.messages ADD COLUMN IF NOT EXISTS media_url TEXT;`);
-  } catch (err) {
-    console.warn("Gagal alter table chat_db.messages:", err.message);
-  }
+  await ensureMediaColumns();
 
   const result = await pool.query(
     `SELECT DISTINCT ON (partner_id) 
@@ -73,4 +67,29 @@ const getConversations = async (userId) => {
   return result.rows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 };
 
-module.exports = { saveMessage, getChatHistory, markMessagesAsRead, getConversations };
+const deleteMessageMedia = async (messageId, userId) => {
+  await ensureMediaColumns();
+
+  const existing = await pool.query(
+    `SELECT * FROM chat_db.messages WHERE id = $1 AND sender_id = $2`,
+    [messageId, userId]
+  );
+
+  const message = existing.rows[0];
+  if (!message || !message.media_url) return null;
+
+  const updated = await pool.query(
+    `UPDATE chat_db.messages
+     SET media_url = NULL, media_deleted = TRUE
+     WHERE id = $1 AND sender_id = $2
+     RETURNING *`,
+    [messageId, userId]
+  );
+
+  return {
+    message: updated.rows[0],
+    mediaUrl: message.media_url,
+  };
+};
+
+module.exports = { saveMessage, getChatHistory, markMessagesAsRead, getConversations, deleteMessageMedia };
