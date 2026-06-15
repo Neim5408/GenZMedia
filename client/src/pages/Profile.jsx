@@ -145,7 +145,14 @@ const Profile = () => {
                   <div className='mt-6 flex flex-col items-center gap-6'>
                     {posts.length > 0 ? (
                         /* PENTING: Meneruskan authorProfile={user} ke PostCard */
-                        posts.map((post) => <PostCard key={post.id} post={post} authorProfile={user} />)
+                        posts.map((post) => (
+                            <PostCard
+                                key={post.id}
+                                post={post}
+                                authorProfile={user}
+                                onPostUpdated={fetchProfileData}
+                            />
+                        ))
                     ) : (
                         <p className="text-gray-500 mt-4">Belum ada postingan.</p>
                     )}

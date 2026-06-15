@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { BadgeCheck, Heart, Share2, MessageCircle } from "lucide-react";
+import { BadgeCheck, Heart, Share2, MessageCircle, Pencil } from "lucide-react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import EditPostModal from "./EditPostModal";
 
 // Tambahkan authorProfile di sini
-const PostCard = ({ post, authorProfile }) => { 
+const PostCard = ({ post, authorProfile, onPostUpdated }) => { 
     const navigate = useNavigate();
+    const [showEditModal, setShowEditModal] = useState(false);
     
     // 1. Ambil data user yang sedang login dari brankas browser (Cukup 1 kali saja)
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
@@ -26,7 +28,7 @@ const PostCard = ({ post, authorProfile }) => {
     const postWithHashtags = content ? content.replace(/(#\w+)/g, '<span class="text-indigo-600">$1</span>') : '';
     
     // 5. Amankan likes array agar tidak crash saat .includes() dipanggil
-    const [likes, setLikes] = useState(post?.likes_count || []);
+    const [likes] = useState(post?.likes_count || []);
 
     const handleLike = async () => {
         // Logika like nanti di sini
@@ -50,19 +52,32 @@ const PostCard = ({ post, authorProfile }) => {
     return ( 
         <div className="bg-white rounded-xl shadow p-4 space-y-4 w-full max-w-2xl hover:shadow-md transition duration-200">
             {/* User Info */}
-            <div onClick={() => navigate('/profile/' + author._id)} className="inline-flex items-center gap-3 cursor-pointer">
-                <img src={author.profile_picture} alt="profile" className="w-10 h-10 rounded-full shadow-sm object-cover border border-gray-100"/>
-                <div>
-                    <div className="flex items-center space-x-1">
-                        <span className="font-semibold text-gray-900 hover:underline">
-                            {author.full_name}
-                        </span>
-                        <BadgeCheck className="w-4 h-4 text-blue-500"/>
-                    </div>
-                    <div className="text-gray-500 text-sm">
-                        @{author.username} • {moment(postDate).fromNow()}
+            <div className="flex items-start justify-between gap-3">
+                <div onClick={() => navigate('/profile/' + author._id)} className="inline-flex items-center gap-3 cursor-pointer">
+                    <img src={author.profile_picture} alt="profile" className="w-10 h-10 rounded-full shadow-sm object-cover border border-gray-100"/>
+                    <div>
+                        <div className="flex items-center space-x-1">
+                            <span className="font-semibold text-gray-900 hover:underline">
+                                {author.full_name}
+                            </span>
+                            <BadgeCheck className="w-4 h-4 text-blue-500"/>
+                        </div>
+                        <div className="text-gray-500 text-sm">
+                            @{author.username} • {moment(postDate).fromNow()}
+                        </div>
                     </div>
                 </div>
+
+                {isOwnPost && (
+                    <button
+                        type="button"
+                        onClick={() => setShowEditModal(true)}
+                        className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold text-indigo-600 hover:bg-indigo-50 transition cursor-pointer"
+                    >
+                        <Pencil className="w-4 h-4" />
+                        Edit
+                    </button>
+                )}
             </div>
             
             {/* Content */}
@@ -112,6 +127,13 @@ const PostCard = ({ post, authorProfile }) => {
                     <span className="font-medium">7</span>
                 </div>
             </div>
+            {showEditModal && (
+                <EditPostModal
+                    post={post}
+                    onClose={() => setShowEditModal(false)}
+                    onPostUpdated={onPostUpdated}
+                />
+            )}
         </div>
     )
 }
