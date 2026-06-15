@@ -332,6 +332,11 @@ const PostCard = ({ post, authorProfile }) => {
                     dangerouslySetInnerHTML={{__html: postWithHashtags}}
                 />
             )}
+        </div>
+    );
+};
+
+export default PostCard;
 
             {/* Media */}
             {mediaItems.length > 0 && (
@@ -961,4 +966,3 @@ const PostCard = ({ post, authorProfile }) => {
                     </div>
                 </div>
             )}
-)}
