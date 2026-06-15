@@ -35,6 +35,7 @@ const register = async (email, password, fullName, username, birthday) => {
   return newUser;
 };
 
+<<<<<<< HEAD
 const adminUsers = [
   { id: 'admin-1', email: 'admin1@insight.com', password: 'Admin123', full_name: 'Admin One', role: 'admin' },
   { id: 'admin-2', email: 'admin2@insight.com', password: 'Admin456', full_name: 'Admin Two', role: 'admin' },
@@ -66,6 +67,9 @@ const login = async (email, password) => {
     };
   }
 
+=======
+const login = async (email, password) => {
+>>>>>>> origin/Kibob_update_home
   const user = await authModel.findUserByEmail(email);
   if (!user) throw new Error("Email tidak ditemukan");
 
@@ -79,14 +83,22 @@ const login = async (email, password) => {
   expires.setDate(expires.getDate() + 1);
   await authModel.createSession(user.id, token, expires);
 
+<<<<<<< HEAD
   return { token, user: { id: user.id, email: user.email, role: 'member' } };
+=======
+  return { token, user: { id: user.id, email: user.email } };
+>>>>>>> origin/Kibob_update_home
 };
 
 const logout = async (token) => {
   // Hapus session berdasarkan token
   const result = await authModel.deleteSession(token);
+<<<<<<< HEAD
   // Jika session tidak ada, tetap anggap logout berhasil.
   return result;
+=======
+  if (result.rowCount === 0) throw new Error("Session tidak ditemukan");
+>>>>>>> origin/Kibob_update_home
 };
 
 const deleteAccount = async (id) => {

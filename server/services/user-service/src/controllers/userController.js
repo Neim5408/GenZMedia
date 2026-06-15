@@ -8,19 +8,34 @@ const path = require('path');
 // ==========================================
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+<<<<<<< HEAD
     cb(null, 'public/uploads'); 
   },
   filename: (req, file, cb) => {
+=======
+    // Foto akan disimpan ke folder ini
+    cb(null, 'public/uploads'); 
+  },
+  filename: (req, file, cb) => {
+    // Agar nama file tidak bertabrakan, kita tambahkan waktu (Date.now())
+>>>>>>> origin/Kibob_update_home
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
 });
 
 const upload = multer({
   storage: storage,
+<<<<<<< HEAD
   limits: { fileSize: 2 * 1024 * 1024 } 
 }).fields([
   { name: 'avatar', maxCount: 1 },
   { name: 'cover', maxCount: 1 }  
+=======
+  limits: { fileSize: 2 * 1024 * 1024 } // Batas maksimal ukuran foto 2MB
+}).fields([
+  { name: 'avatar', maxCount: 1 }, // Menerima 1 file untuk 'avatar'
+  { name: 'cover', maxCount: 1 }   // Menerima 1 file untuk 'cover'
+>>>>>>> origin/Kibob_update_home
 ]);
 
 
@@ -28,7 +43,11 @@ const upload = multer({
 // CONTROLLERS
 // ==========================================
 
+<<<<<<< HEAD
 // --- 1. Edit Profil ---
+=======
+// --- 1. Edit Profil (Teks & Gambar) ---
+>>>>>>> origin/Kibob_update_home
 exports.updateProfile = (req, res) => {
   upload(req, res, async (err) => {
     if (err) return res.status(400).json({ error: err.message });
@@ -37,20 +56,42 @@ exports.updateProfile = (req, res) => {
     const { full_name, bio } = req.body;
 
     try {
+<<<<<<< HEAD
+=======
+      // Ambil data profil lama
+>>>>>>> origin/Kibob_update_home
       const currentUser = await userService.getProfile(id);
       let avatarUrl = currentUser.avatar_url;
       let coverUrl = currentUser.cover_photo_url;
 
+<<<<<<< HEAD
+=======
+      // Jika user mengunggah foto profil baru, ubah URL-nya
+>>>>>>> origin/Kibob_update_home
       if (req.files && req.files.avatar) {
         avatarUrl = `${req.protocol}://${req.get('host')}/uploads/${req.files.avatar[0].filename}`;
       }
       
+<<<<<<< HEAD
+=======
+      // Jika user mengunggah foto cover baru, ubah URL-nya
+>>>>>>> origin/Kibob_update_home
       if (req.files && req.files.cover) {
         coverUrl = `${req.protocol}://${req.get('host')}/uploads/${req.files.cover[0].filename}`;
       }
 
+<<<<<<< HEAD
       const updatedUser = await userService.updateUserData({
         id, full_name, bio, avatar_url: avatarUrl, cover_photo_url: coverUrl
+=======
+      // Update data di Database
+      const updatedUser = await userService.updateUserData({
+        id,
+        full_name,
+        bio,
+        avatar_url: avatarUrl,
+        cover_photo_url: coverUrl
+>>>>>>> origin/Kibob_update_home
       });
 
       res.status(200).json({ message: "Profil berhasil diperbarui", updatedUser });
@@ -60,7 +101,11 @@ exports.updateProfile = (req, res) => {
   });
 };
 
+<<<<<<< HEAD
 // --- 2. Buat Profil Baru ---
+=======
+// --- 2. Buat Profil Baru (Dari Auth Service) ---
+>>>>>>> origin/Kibob_update_home
 exports.createUser = async (req, res) => {
   try {
     const user = await userService.registerProfile(req.body);
@@ -102,7 +147,11 @@ exports.unfollowUser = async (req, res) => {
    }
 };
 
+<<<<<<< HEAD
 // --- 6. Ambil Data Followers & Following ---
+=======
+// --- 6. Ambil Data Followers & Following (Network) ---
+>>>>>>> origin/Kibob_update_home
 exports.getFollowData = async (req, res) => {
   try {
     const { id } = req.params;
@@ -123,6 +172,7 @@ exports.deleteUser = async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
+<<<<<<< HEAD
 };
 
 // --- 8. Cari Pengguna (Discover) ---
@@ -156,4 +206,6 @@ exports.getFollowingList = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+=======
+>>>>>>> origin/Kibob_update_home
 };

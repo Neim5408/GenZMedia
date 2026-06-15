@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
+=======
+// import React, { useState } from "react";
+import React, { useState } from "react";
+>>>>>>> origin/Kibob_update_home
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { dummyUserData } from "../assets/assets";
 import Loading from "../components/Loading";
+<<<<<<< HEAD
 import { notificationApi } from "../utils/api";
 
 const Layout = () => {
@@ -30,11 +36,23 @@ const Layout = () => {
         const interval = setInterval(fetchUnreadCount, 15000);
         return () => clearInterval(interval);
     }, [user?.id]);
+=======
+
+
+const Layout = () => {
+
+        const user =dummyUserData
+        const [sidebarOpen, setSidebarOpen] = useState(false);
+>>>>>>> origin/Kibob_update_home
 
     return user ? (
         <div className="w-full flex h-screen overflow-hidden">
 
+<<<<<<< HEAD
             <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} unreadCount={unreadCount} />
+=======
+            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+>>>>>>> origin/Kibob_update_home
 
             <div className="flex-1 bg-slate-50 overflow-y-auto">
                 <Outlet />

@@ -1,9 +1,16 @@
 import React, {useEffect, useState} from "react";
+<<<<<<< HEAD
+=======
+import { dummyStoriesData } from "../assets/assets";
+>>>>>>> origin/Kibob_update_home
 import { Plus } from "lucide-react";
 import moment from "moment";
 import StoryModal from "./StoryModal";
 import StoryViewer from "./StoryViewer";
+<<<<<<< HEAD
 import { postApi } from "../utils/api";
+=======
+>>>>>>> origin/Kibob_update_home
 
 const StoriesBar = () => { 
     
@@ -11,6 +18,7 @@ const StoriesBar = () => {
     const [showModal, setShowModal] = useState(false);
     const [viewStory, setViewStory] = useState(null);
 
+<<<<<<< HEAD
     const fetchStories = async () => {
         const currentUser = JSON.parse(localStorage.getItem('user'));
         if (!currentUser?.id) {
@@ -30,6 +38,15 @@ const StoriesBar = () => {
     useEffect(() => {
         fetchStories();
     }, []);
+=======
+    const fetchStories = async () => { 
+        setStories(dummyStoriesData);
+    }
+    
+    useEffect(() => { 
+        fetchStories();
+    }, [])
+>>>>>>> origin/Kibob_update_home
     return (
         <div className="w-screen sm:w-[calc(100vw-240px)] lg:max-w-2xl no-scrollbar overflow-x-auto px-4">
             <div className="flex gap-4 pb-5">

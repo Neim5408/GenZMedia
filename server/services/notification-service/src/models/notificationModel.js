@@ -1,10 +1,18 @@
 const pool = require('../../db');
 
+<<<<<<< HEAD
 const createNotification = async (userId, type, referenceId, postId) => {
   const result = await pool.query(
     `INSERT INTO notification_db.notifications (user_id, type, reference_id, post_id)
      VALUES ($1, $2, $3, $4) RETURNING *`,
     [userId, type, referenceId, postId]
+=======
+const createNotification = async (userId, type, referenceId) => {
+  const result = await pool.query(
+    `INSERT INTO notification_db.notifications (user_id, type, reference_id)
+     VALUES ($1, $2, $3) RETURNING *`,
+    [userId, type, referenceId]
+>>>>>>> origin/Kibob_update_home
   );
   return result.rows[0];
 };
@@ -26,6 +34,7 @@ const markAsRead = async (id) => {
   return result.rows[0];
 };
 
+<<<<<<< HEAD
 const markAllAsRead = async (userId) => {
   const result = await pool.query(
     `UPDATE notification_db.notifications SET is_read = TRUE WHERE user_id = $1 RETURNING *`,
@@ -43,3 +52,6 @@ const deleteNotification = async (id) => {
 };
 
 module.exports = { createNotification, getUserNotifications, markAsRead, markAllAsRead, deleteNotification };
+=======
+module.exports = { createNotification, getUserNotifications, markAsRead };
+>>>>>>> origin/Kibob_update_home

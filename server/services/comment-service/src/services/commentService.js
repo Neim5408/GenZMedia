@@ -19,18 +19,26 @@ const fetchPostComments = async (postId) => {
 const removeComment = async (commentId, userId) => {
     if (!commentId || !userId) throw new Error("Comment ID dan User ID wajib dikirim");
     
+<<<<<<< HEAD
     const isAdmin = userId === 'admin-1' || userId === 'admin-2';
     const deleted = isAdmin
         ? await commentModel.deleteCommentById(commentId)
         : await commentModel.deleteComment(commentId, userId);
         
+=======
+    const deleted = await commentModel.deleteComment(commentId, userId);
+>>>>>>> origin/Kibob_update_home
     if (!deleted) throw new Error("Komentar tidak ditemukan atau kamu tidak berhak menghapusnya");
     
     return deleted;
 };
 
+<<<<<<< HEAD
 const fetchAllComments = async () => {
     return await commentModel.getAllComments();
 };
 
 module.exports = { addComment, fetchPostComments, removeComment, fetchAllComments };
+=======
+module.exports = { addComment, fetchPostComments, removeComment };
+>>>>>>> origin/Kibob_update_home

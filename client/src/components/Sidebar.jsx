@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react"; // Tambahkan useEffect
 import { assets, dummyUserData } from "../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
@@ -68,6 +69,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, unreadCount }) => {
         }
     }
   };
+=======
+import React, { useState } from "react";
+import { assets, dummyUserData } from "../assets/assets";
+import { Link, useNavigate } from "react-router-dom";
+import MenuItems from "./MenuItems";
+import { CirclePlus, LogOut } from "lucide-react";
+import { UserButton, useClerk } from "@clerk/react";
+
+const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+  const navigate = useNavigate();
+  const user = dummyUserData;
+  const { signOut } = useClerk();
+  const [notificationCount, setNotificationCount] = useState(5);
+>>>>>>> origin/Kibob_update_home
 
   return (
     <div
@@ -79,6 +94,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, unreadCount }) => {
         <img onClick={() => navigate("/")} src={assets.logo} className="w-26 ml-7 my-2 cursor-pointer" alt="" />
         <hr className="border-gray-300 mb-8"/>
 
+<<<<<<< HEAD
         {userData?.role === 'admin' ? (
           <div className="px-6 space-y-1">
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Admin Panel</p>
@@ -101,10 +117,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, unreadCount }) => {
             </Link>
           </>
         )}
+=======
+        <MenuItems setSidebarOpen={setSidebarOpen} />
+
+        <Link to='/create-post' className='flex items-center justify-center gap-2 py-2.5 mt-6 mx-6 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-700 hover:to-purple-800 active:scale-95 transition text-white cursor-pointer'>
+          <CirclePlus className="w-5 h-5" />
+          Create Post
+        </Link>
+>>>>>>> origin/Kibob_update_home
       </div>
 
       <div className="w-full border-t border-gray-200 p-4 px-7 flex items-center justify-between">
         <div className="flex gap-2 items-center cursor-pointer">
+<<<<<<< HEAD
           
           {/* MENGGUNAKAN DATA userData YANG SUDAH DI-UPDATE DARI DATABASE */}
           <img 
@@ -120,6 +145,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, unreadCount }) => {
         </div>
         
         <LogOut onClick={handleLogout} className="w-4.5 text-gray-400 hover:text-red-500 transition cursor-pointer" />
+=======
+          <UserButton />
+          <div>
+            <h1 className="text-sm font-medium">{user.full_name}</h1>
+            <p className="text-xs text-gray-500">@{user.full_name}</p>
+          </div>
+        </div>
+        <LogOut onClick={signOut} className="w-4.5 text-gray-400 hover:text-gray-700 transition cursor-pointer" />
+>>>>>>> origin/Kibob_update_home
       </div>
 
     </div>

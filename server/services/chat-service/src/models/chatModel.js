@@ -1,5 +1,6 @@
 const pool = require('../../db');
 
+<<<<<<< HEAD
 const saveMessage = async (senderId, receiverId, messageText, mediaUrl = null) => {
   // Pastikan kolom media_url ada di database
   try {
@@ -12,11 +13,19 @@ const saveMessage = async (senderId, receiverId, messageText, mediaUrl = null) =
     `INSERT INTO chat_db.messages (sender_id, receiver_id, message_text, media_url)
      VALUES ($1, $2, $3, $4) RETURNING *`,
     [senderId, receiverId, messageText, mediaUrl]
+=======
+const saveMessage = async (senderId, receiverId, messageText) => {
+  const result = await pool.query(
+    `INSERT INTO chat_db.messages (sender_id, receiver_id, message_text)
+     VALUES ($1, $2, $3) RETURNING *`,
+    [senderId, receiverId, messageText]
+>>>>>>> origin/Kibob_update_home
   );
   return result.rows[0];
 };
 
 const getChatHistory = async (user1, user2) => {
+<<<<<<< HEAD
   // Pastikan kolom media_url ada di database saat fetch history
   try {
     await pool.query(`ALTER TABLE chat_db.messages ADD COLUMN IF NOT EXISTS media_url TEXT;`);
@@ -24,6 +33,8 @@ const getChatHistory = async (user1, user2) => {
     console.warn("Gagal alter table chat_db.messages:", err.message);
   }
 
+=======
+>>>>>>> origin/Kibob_update_home
   const result = await pool.query(
     `SELECT * FROM chat_db.messages 
      WHERE (sender_id = $1 AND receiver_id = $2) 
@@ -42,6 +53,7 @@ const markMessagesAsRead = async (senderId, receiverId) => {
   );
 };
 
+<<<<<<< HEAD
 const getConversations = async (userId) => {
   // Pastikan kolom media_url ada
   try {
@@ -74,3 +86,6 @@ const getConversations = async (userId) => {
 };
 
 module.exports = { saveMessage, getChatHistory, markMessagesAsRead, getConversations };
+=======
+module.exports = { saveMessage, getChatHistory, markMessagesAsRead };
+>>>>>>> origin/Kibob_update_home

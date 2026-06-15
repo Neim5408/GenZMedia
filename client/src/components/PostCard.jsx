@@ -961,8 +961,4 @@ const PostCard = ({ post, authorProfile }) => {
                     </div>
                 </div>
             )}
-        </div>
-    )
-}
-
-export default PostCard;
+)}

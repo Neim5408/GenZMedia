@@ -22,13 +22,18 @@ exports.getPostComments = async (req, res) => {
 exports.destroy = async (req, res) => {
   try {
     const { id } = req.params;
+<<<<<<< HEAD
     const user_id = req.body.user_id || req.query.user_id; // Support body or query param
+=======
+    const { user_id } = req.body; // Ambil ID user untuk validasi kepemilikan
+>>>>>>> origin/Kibob_update_home
 
     await commentService.removeComment(id, user_id);
     res.status(200).json({ message: "Komentar berhasil dihapus" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
+<<<<<<< HEAD
 };
 
 exports.getAll = async (req, res) => {
@@ -38,4 +43,6 @@ exports.getAll = async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
+=======
+>>>>>>> origin/Kibob_update_home
 };

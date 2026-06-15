@@ -1,4 +1,5 @@
 const chatService = require('../services/chatService');
+<<<<<<< HEAD
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -45,12 +46,21 @@ const handleMessageCreation = async (req, res) => {
       io.to(receiver_id).emit('receiveMessage', message);
     }
 
+=======
+
+exports.send = async (req, res) => {
+  try {
+    const message = await chatService.sendMessage(req.body);
+    const io = req.app.get('io');
+    io.to(message.receiver_id).emit('receiveMessage', message);
+>>>>>>> origin/Kibob_update_home
     res.status(201).json({ message: "Pesan terkirim", data: message });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
+<<<<<<< HEAD
 exports.send = (req, res) => {
   const contentType = req.headers['content-type'] || '';
   if (contentType.includes('multipart/form-data')) {
@@ -64,6 +74,8 @@ exports.send = (req, res) => {
   }
 };
 
+=======
+>>>>>>> origin/Kibob_update_home
 exports.getHistory = async (req, res) => {
   try {
     const { userA, userB } = req.params;
@@ -74,6 +86,7 @@ exports.getHistory = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 exports.getMessages = async (req, res) => {
   try {
     const { receiverId } = req.params;
@@ -97,6 +110,8 @@ exports.getConversations = async (req, res) => {
   }
 };
 
+=======
+>>>>>>> origin/Kibob_update_home
 exports.markAsRead = async (req, res) => {
   try {
     const { senderId, receiverId } = req.body;

@@ -37,7 +37,10 @@ io.on('connection', (socket) => {
 });
 
 app.use('/chat', chatRoutes);
+<<<<<<< HEAD
 app.use('/uploads', express.static('public/uploads'));
+=======
+>>>>>>> origin/Kibob_update_home
 
 const PORT = process.env.PORT || 50057;
 server.listen(PORT, () => {

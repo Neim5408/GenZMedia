@@ -11,12 +11,16 @@ const createComment = async (postId, userId, content, parentId = null) => {
 
 const getCommentsByPostId = async (postId) => {
   const result = await pool.query(
+<<<<<<< HEAD
     `SELECT c.id, c.post_id, c.user_id, c.parent_id, c.content, c.created_at,
             u.username, u.full_name, u.avatar_url
      FROM comment_db.comments c
      LEFT JOIN user_db.users_profile u ON c.user_id = u.id
      WHERE c.post_id = $1 
      ORDER BY c.created_at ASC`,
+=======
+    `SELECT * FROM comment_db.comments WHERE post_id = $1 ORDER BY created_at ASC`,
+>>>>>>> origin/Kibob_update_home
     [postId]
   );
   return result.rows;
@@ -30,6 +34,7 @@ const deleteComment = async (commentId, userId) => {
   return result.rows[0];
 };
 
+<<<<<<< HEAD
 const deleteCommentById = async (commentId) => {
   const result = await pool.query(
     `DELETE FROM comment_db.comments WHERE id = $1 RETURNING *`,
@@ -50,3 +55,6 @@ const getAllComments = async () => {
 };
 
 module.exports = { createComment, getCommentsByPostId, deleteComment, deleteCommentById, getAllComments };
+=======
+module.exports = { createComment, getCommentsByPostId, deleteComment };
+>>>>>>> origin/Kibob_update_home

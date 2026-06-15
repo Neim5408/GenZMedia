@@ -1,10 +1,17 @@
 const notificationModel = require('../models/notificationModel');
 
 const addNotification = async (data) => {
+<<<<<<< HEAD
   const { user_id, type, reference_id, post_id } = data;
   if (!user_id || !type) throw new Error("User ID dan Tipe notifikasi wajib diisi");
   
   return await notificationModel.createNotification(user_id, type, reference_id, post_id);
+=======
+  const { user_id, type, reference_id } = data;
+  if (!user_id || !type) throw new Error("User ID dan Tipe notifikasi wajib diisi");
+  
+  return await notificationModel.createNotification(user_id, type, reference_id);
+>>>>>>> origin/Kibob_update_home
 };
 
 const fetchUserNotifications = async (userId) => {
@@ -17,6 +24,7 @@ const readNotification = async (id) => {
   return updated;
 };
 
+<<<<<<< HEAD
 const readAllNotifications = async (userId) => {
   if (!userId) throw new Error("User ID wajib diisi");
   return await notificationModel.markAllAsRead(userId);
@@ -30,3 +38,6 @@ const removeNotification = async (id) => {
 };
 
 module.exports = { addNotification, fetchUserNotifications, readNotification, readAllNotifications, removeNotification };
+=======
+module.exports = { addNotification, fetchUserNotifications, readNotification };
+>>>>>>> origin/Kibob_update_home
