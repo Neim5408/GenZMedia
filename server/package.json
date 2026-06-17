@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev:auth": "cd services/auth-service && npm run dev",
+    "dev:chat": "cd services/chat-service && npm run dev",
+    "dev:post": "cd services/post-service && npm run dev",
+    "dev:user": "cd services/user-service && npm run dev",
+    "dev:admin": "cd services/admin-service && npm run dev",
+    "dev:comment": "cd services/comment-service && npm run dev",
+    "dev:notification": "cd services/notification-service && npm run dev",
+    "dev:reaction": "cd services/reaction-service && npm run dev",
+    "dev:all": "concurrently \"npm run dev:auth\" \"npm run dev:chat\" \"npm run dev:post\" \"npm run dev:user\" \"npm run dev:admin\" \"npm run dev:comment\" \"npm run dev:notification\" \"npm run dev:reaction\""
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "enter": "^0.0.2",
+    "express": "^5.2.1",
+    "http-proxy": "^1.18.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.20.0"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3",
+    "nodemon": "^3.1.14"
+  },
+  "keywords": []
+}
