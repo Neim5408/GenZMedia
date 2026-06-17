@@ -75,10 +75,11 @@ server.on('upgrade', (req, socket, head) => {
   }
 });
 
-// Jalankan gateway di port 8080
-server.listen(8080, () => {
+// Jalankan gateway di port dari environment (Railway) atau default 8080
+const GATEWAY_PORT = process.env.PORT || 8080;
+server.listen(GATEWAY_PORT, () => {
   console.log('====================================================');
-  console.log('🚀 Local Gateway aktif di port 8080');
-  console.log('👉 Sekarang jalankan di terminal baru: ngrok http 8080');
+  console.log(`🚀 Local Gateway aktif di port ${GATEWAY_PORT}`);
+  console.log(`👉 Sekarang jalankan di terminal baru: ngrok http ${GATEWAY_PORT}`);
   console.log('====================================================');
 });
